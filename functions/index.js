@@ -21,6 +21,7 @@ const askForDateTime = require('./helper-intents/ask-for-datetime');
 const askForPermission = require('./helper-intents/ask-for-permission');
 const askForPlace = require('./helper-intents/ask-for-place');
 const askForSignIn = require('./helper-intents/ask-for-sign-in');
+const askToDeepLink = require('./helper-intents/ask-to-deep-link');
 
 function createActionMap() {
   let actionMap = new Map();
@@ -49,6 +50,7 @@ exports.helperIntentExampleAction = functions.https.onRequest((request, response
       askForPermission,
       askForPlace,
       askForSignIn,
+      askToDeepLink,
       welcome
       );
 
