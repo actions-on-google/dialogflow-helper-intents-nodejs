@@ -11,19 +11,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+const {SignIn} = require('actions-on-google');
+
 module.exports = {
 
-  'ask.for.sign.in': (app) => {
-    app.askForSignIn();
+  'ask_for_sign_in': (conv) => {
+    conv.ask(new SignIn());
   },
 
-  'ask.for.sign.in.confirmation': (app) => {
-    if (app.getSignInStatus() === app.SignInStatus.OK) {
-      let accessToken = app.getUser().accessToken;
-      // access account data with token
-    } else {
-      app.ask('You need to sign-in before using the app.');
+  'ask_for_sign_in_confirmation': (conv, params, signin) => {
+    if (signin.status !== 'OK') {
+      return conv.ask('You need to sign in before using the app.');
     }
-  }
+    // const access = conv.user.access.token;
+    // possibly do something with access token
+    return conv.ask('Great! Thanks for signing in.');
+  },
 
 };

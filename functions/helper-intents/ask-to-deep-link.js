@@ -11,18 +11,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+const {DeepLink} = require('actions-on-google');
+
 module.exports = {
 
-  'ask.to.deep.link': (app) => {
-    app.askToDeepLink('Great! Looks like we can do that in the app.', 'Google',
-      'example://gizmos', 'com.example.gizmos', 'handle this for you.');
+  'ask_to_deep_link': (conv) => {
+    const options = {
+      destination: 'Google',
+      url: 'example://gizmos',
+      package: 'com.example.gizmos',
+      reason: 'handle this for you',
+    };
+    conv.ask('Great! looks like maybe we can do that in the app.');
+    conv.ask(new DeepLink(options));
   },
 
   // This intent is only triggered if the user rejects the deep link
-  'ask.to.deep.link.rejection': (app) => {
-    const linkStatus = app.getLinkStatus();
-    console.log('Link status: ' + linkStatus);
-    app.ask('Okay maybe we can take care of that another time.');
-  }
+  'ask_to_deep_link_rejection': (conv, params, response) => {
+    conv.ask('Okay maybe we can take care of that another time.');
+  },
 
 };

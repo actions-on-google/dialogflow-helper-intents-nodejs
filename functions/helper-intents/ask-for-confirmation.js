@@ -11,18 +11,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+const {Confirmation} = require('actions-on-google');
+
 module.exports = {
 
-  'ask.for.confirmation': (app) => {
-    app.askForConfirmation('Will you marry me?');
+  'ask_for_confirmation': (conv) => {
+    conv.ask(new Confirmation('Can you confirm?'));
   },
 
-  'ask.for.confirmation.confirmation': (app) => {
-    if (app.getUserConfirmation()) {
-      app.ask('Yes!');
-    } else {
-      app.ask('Bye!');
-    }
-  }
+  'ask_for_confirmation_confirmation': (conv, params, confirmationGranted) => {
+    return conv.ask(confirmationGranted ? 'Lovely' : 'Alas');
+  },
 
 };

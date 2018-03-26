@@ -13,46 +13,7 @@
 
 'use strict';
 
-process.env.DEBUG = 'actions-on-google:*';
-const { DialogflowApp } = require('actions-on-google');
 const functions = require('firebase-functions');
-const askForConfirmation = require('./helper-intents/ask-for-confirmation');
-const askForDateTime = require('./helper-intents/ask-for-datetime');
-const askForPermission = require('./helper-intents/ask-for-permission');
-const askForPlace = require('./helper-intents/ask-for-place');
-const askForSignIn = require('./helper-intents/ask-for-sign-in');
-const askToDeepLink = require('./helper-intents/ask-to-deep-link');
+const app = require('./app');
 
-function createActionMap () {
-  let actionMap = new Map();
-  for (let i = 0; i < arguments.length; i++) {
-    for (let key in arguments[i]) {
-      actionMap.set(key, arguments[i][key]);
-    }
-  }
-  return actionMap;
-}
-
-exports.helperIntentExampleAction = functions.https.onRequest((request, response) => {
-  const app = new DialogflowApp({request, response});
-  console.log('Request headers: ' + JSON.stringify(request.headers));
-  console.log('Request body: ' + JSON.stringify(request.body));
-
-  const welcome = {
-    'input.welcome': (app) => {
-      app.ask('Hi there, what intent would you like to know about?');
-    }
-  };
-
-  const actionMap = createActionMap(
-      askForConfirmation,
-      askForDateTime,
-      askForPermission,
-      askForPlace,
-      askForSignIn,
-      askToDeepLink,
-      welcome
-      );
-
-  app.handleRequest(actionMap);
-});
+module.exports.helperIntentExampleAction = functions.https.onRequest(app);

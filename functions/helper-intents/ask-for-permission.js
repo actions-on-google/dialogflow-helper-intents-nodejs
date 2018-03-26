@@ -11,30 +11,33 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+const {Permission} = require('actions-on-google');
+
 module.exports = {
 
-  'ask.for.permission': (app) => {
-    // Choose one or more supported permissions to request:
-    // app.SupportedPermissions.NAME
-    // app.SupportedPermissions.DEVICE_PRECISE_LOCATION
-    // app.SupportedPermissions.DEVICE_COARSE_LOCATION
-    let namePermission = app.SupportedPermissions.NAME;
-    let preciseLocationPermission = app.SupportedPermissions.DEVICE_PRECISE_LOCATION;
-    // Ask for more than one permission. User can authorize all or none.
-    app.askForPermissions('To address you by name and know your location',
-        [namePermission, preciseLocationPermission]);
+  'ask_for_permission': (conv) => {
+    const options = {
+      context: 'To address you by name and know your location',
+      // Ask for more than one permission. User can authorize all or none.
+      permissions: ['NAME', 'DEVICE_PRECISE_LOCATION'],
+    };
+    conv.ask(new Permission(options));
   },
 
-  'ask.for.permission.confirmation': (app) => {
-    if (app.isPermissionGranted()) {
-      const displayName = app.getUserName().displayName;
-      const address = app.getDeviceLocation().address;
-      app.ask('I will tell your driver to pick up ' + displayName +
-          ' at ' + address);
+  'ask_for_permission_confirmation': (conv, params, confirmationGranted) => {
+    const {location} = conv.device;
+    const {name} = conv.user;
+    if (confirmationGranted) {
+      if (name) {
+        conv.ask(`I'll send the driver you're way now ${name.display}.`);
+      }
+      if (location) {
+        // const { latitude, longitude } = location.coordinates;
+        // you can uncomment the above lines and use the latitude and longitude
+      }
     } else {
-      // Response shows that user did not grant permission
-      app.ask('Sorry, I could not figure out where to pick you up.');
+      conv.ask(`Okay, yeah that's fine. I... didn't really want it anyway.`);
     }
-  }
+  },
 
 };

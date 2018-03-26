@@ -11,24 +11,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+const {DateTime} = require('actions-on-google');
+
 module.exports = {
 
-  'ask.for.datetime': (app) => {
-    app.askForDateTime('When do you want to come in?',
-        'What is the best date to schedule your appointment?',
-        'What time of day works best for you?');
+  'ask_for_datetime': (conv) => {
+    const options = {
+      prompts: {
+        initial: 'When would you like to schedule the appoinment?',
+        date: 'What day was that?',
+        time: 'What time?',
+      },
+    };
+    conv.ask(new DateTime(options));
   },
 
-  'ask.for.datetime.confirmation': (app) => {
-    if (app.getDateTime()) {
-      app.ask({speech: 'Great, see you at your appointment!',
-        displayText: 'Great, we\'ll see you on ' + app.getDateTime().date.month +
-            '/' + app.getDateTime().date.day +
-            ' at ' + app.getDateTime().time.hours +
-            (app.getDateTime().time.minutes || '')});
+  'ask_for_datetime_confirmation': (conv, params, confirmationGranted) => {
+    if (confirmationGranted) {
+      // Get the date and time and display it back to the user
+      conv.ask('Alright, date set.');
     } else {
-      app.ask('I\'m having a hard time finding an appointment');
+      conv.ask(`I'm having a hard time finding an appointment`);
     }
-  }
+  },
 
 };
