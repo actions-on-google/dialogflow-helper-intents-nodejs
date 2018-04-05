@@ -11,7 +11,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-
 module.exports = {
 
   'ask.for.datetime': (app) => {
@@ -23,10 +22,10 @@ module.exports = {
   'ask.for.datetime.confirmation': (app) => {
     if (app.getDateTime()) {
       app.ask({speech: 'Great, see you at your appointment!',
-        displayText: 'Great, we\'ll see you on ' + app.getDateTime().date.month
-            + '/' + app.getDateTime().date.day
-            + ' at ' + app.getDateTime().time.hours
-            + (app.getDateTime().time.minutes || '')});
+        displayText: 'Great, we\'ll see you on ' + app.getDateTime().date.month +
+            '/' + app.getDateTime().date.day +
+            ' at ' + app.getDateTime().time.hours +
+            (app.getDateTime().time.minutes || '')});
     } else {
       app.ask('I\'m having a hard time finding an appointment');
     }

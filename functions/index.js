@@ -23,7 +23,7 @@ const askForPlace = require('./helper-intents/ask-for-place');
 const askForSignIn = require('./helper-intents/ask-for-sign-in');
 const askToDeepLink = require('./helper-intents/ask-to-deep-link');
 
-function createActionMap() {
+function createActionMap () {
   let actionMap = new Map();
   for (let i = 0; i < arguments.length; i++) {
     for (let key in arguments[i]) {
