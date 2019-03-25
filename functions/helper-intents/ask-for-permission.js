@@ -29,7 +29,7 @@ module.exports = {
     const {name} = conv.user;
     if (confirmationGranted) {
       if (name) {
-        conv.ask(`I'll send the driver you're way now ${name.display}.`);
+        conv.ask(`I'll send the driver your way now ${name.display}.`);
       }
       if (location) {
         // const { latitude, longitude } = location.coordinates;
