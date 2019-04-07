@@ -18,7 +18,7 @@ module.exports = {
   'ask_for_datetime': (conv) => {
     const options = {
       prompts: {
-        initial: 'When would you like to schedule the appoinment?',
+        initial: 'When would you like to schedule the appointment?',
         date: 'What day was that?',
         time: 'What time?',
       },
@@ -26,13 +26,8 @@ module.exports = {
     conv.ask(new DateTime(options));
   },
 
-  'ask_for_datetime_confirmation': (conv, params, confirmationGranted) => {
-    if (confirmationGranted) {
-      // Get the date and time and display it back to the user
-      conv.ask('Alright, date set.');
-    } else {
-      conv.ask(`I'm having a hard time finding an appointment`);
-    }
+  'ask_for_datetime_confirmation': (conv, params, datetime) => {
+    const { month, day } = datetime.date
+    conv.ask(`Great, we will see you on ${month}/${day}`);
   },
-
 };
