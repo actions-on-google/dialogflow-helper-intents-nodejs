@@ -28,6 +28,11 @@ module.exports = {
 
   'ask_for_datetime_confirmation': (conv, params, datetime) => {
     const { month, day } = datetime.date
-    conv.ask(`Great, we will see you on ${month}/${day}`);
+    const { hours, minutes } = datetime.time
+    conv.ask(`<speak>
+        Great, we will see you on 
+        <say-as interpret-as="date" format="dm">${day}-${month}</say-as>
+        <say-as interpret-as="time" format="hms12" detail="2">${hours}:${minutes || '00'}</say-as>
+      </speak>`);
   },
 };
