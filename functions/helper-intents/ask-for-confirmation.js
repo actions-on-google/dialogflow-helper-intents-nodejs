@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const {Confirmation} = require('actions-on-google');
+const {Confirmation, Suggestions} = require('actions-on-google');
 
 module.exports = {
 
@@ -20,7 +20,12 @@ module.exports = {
   },
 
   'ask_for_confirmation_confirmation': (conv, params, confirmationGranted) => {
-    return conv.ask(confirmationGranted ? 'Lovely' : 'Alas');
+    conv.ask(confirmationGranted ? 'Lovely' : 'Alas');
+    conv.ask(new Suggestions([
+      'Date time',
+      'Permission',
+      'Place',
+      'Sign In',
+    ]));
   },
-
 };

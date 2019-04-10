@@ -13,14 +13,22 @@
 
 'use strict';
 
+const {
+  dialogflow,
+  SignIn,
+  Suggestions,
+} = require('actions-on-google');
+
+const app = dialogflow({
+  clientId: `<INSERT_CLIENT_ID>`,
+  debug: true,
+});
+
 const askForConfirmation = require('./helper-intents/ask-for-confirmation');
 const askForDateTime = require('./helper-intents/ask-for-datetime');
 const askForPermission = require('./helper-intents/ask-for-permission');
 const askForPlace = require('./helper-intents/ask-for-place');
 const askForSignIn = require('./helper-intents/ask-for-sign-in');
-const askToDeepLink = require('./helper-intents/ask-to-deep-link');
-
-const app = require('actions-on-google').dialogflow();
 
 /** Adds Intent-name & callback key value pairs to app */
 function addIntents(...args) {
@@ -37,11 +45,18 @@ addIntents(
   askForPermission,
   askForPlace,
   askForSignIn,
-  askToDeepLink
 );
 
 app.intent('Default Welcome Intent', (conv) => {
-  conv.ask('Welcome to the Helper Intents Tutorial.');
+  conv.ask('I can tell you about built-in helper intents, such as ' +
+    'confirmation, date time, and more on your phone, speaker, and smart display.');
+  conv.ask(new Suggestions([
+    'Confirmation',
+    'Date time',
+    'Permission',
+    'Place',
+    'Sign In',
+  ]));
 });
 
 module.exports = app;

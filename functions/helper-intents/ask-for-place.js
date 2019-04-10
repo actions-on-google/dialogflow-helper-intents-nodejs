@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const {Place} = require('actions-on-google');
+const {Place, Suggestions} = require('actions-on-google');
 
 module.exports = {
 
@@ -25,9 +25,17 @@ module.exports = {
 
   'ask_for_place_confirmation': (conv, params, place, status) => {
     if (!place) return conv.ask(`Sorry, I couldn't get a location from you`);
-    // the place also carries formattedAddress, and coordinates fields
+    // Place also contains formattedAddress and coordinates
     const {name} = place;
-    if (place.name) conv.ask(`Alright! I'll send the car to ${name}`);
+    if (place.name) {
+      conv.ask(`Alright! I'll send the car to ${name}`);
+      conv.ask(new Suggestions([
+        'Confirmation',
+        'Date time',
+        'Permission',
+        'Sign In',
+      ]));
+    }
   },
 
 };

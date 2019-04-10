@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const {Permission} = require('actions-on-google');
+const {Permission, Suggestions} = require('actions-on-google');
 
 module.exports = {
 
@@ -30,13 +30,25 @@ module.exports = {
     if (confirmationGranted) {
       if (name) {
         conv.ask(`I'll send the driver your way now ${name.display}.`);
+        conv.ask(new Suggestions([
+          'Confirmation',
+          'Date time',
+          'Place',
+          'Sign In',
+        ]));
       }
       if (location) {
         // const { latitude, longitude } = location.coordinates;
         // you can uncomment the above lines and use the latitude and longitude
       }
     } else {
-      conv.ask(`Okay, yeah that's fine. I... didn't really want it anyway.`);
+      conv.ask(`Looks like I can't get your location`);
+      conv.ask(new Suggestions([
+        'Confirmation',
+        'Date time',
+        'Place',
+        'Sign In',
+      ]));
     }
   },
 

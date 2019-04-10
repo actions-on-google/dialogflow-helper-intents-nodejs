@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-const {SignIn} = require('actions-on-google');
+const {SignIn, Suggestions} = require('actions-on-google');
 
 module.exports = {
 
@@ -25,7 +25,13 @@ module.exports = {
     }
     // const access = conv.user.access.token;
     // possibly do something with access token
-    return conv.ask('Great! Thanks for signing in.');
+    conv.ask(' Thanks for signing in!');
+    conv.ask(new Suggestions([
+      'Confirmation',
+      'Date time',
+      'Permission',
+      'Place',
+    ]));
   },
 
 };
