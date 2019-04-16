@@ -48,7 +48,7 @@ addIntents(
 );
 
 app.intent('Default Welcome Intent', (conv) => {
-  conv.ask('I can tell you about built-in helper intents, such as ' +
+  conv.ask('I can tell you about platform-native helper intents, such as ' +
     'confirmation, date time, and more on your phone, speaker, and smart display.');
   conv.ask(new Suggestions([
     'Confirmation',
