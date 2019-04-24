@@ -17,7 +17,7 @@ module.exports = {
 
   'ask_for_place': (conv) => {
     const options = {
-      context: 'To find a place to pick you up',
+      context: 'To find pickup locations',
       prompt: 'Where would you like to be picked up?',
     };
     conv.ask(new Place(options));
@@ -28,10 +28,10 @@ module.exports = {
     // Place also contains formattedAddress and coordinates
     const {name} = place;
     if (place.name) {
-      conv.ask(`Alright! I'll send the car to ${name}`);
+      conv.ask(`Alright! I am sending a car to ${name}`);
       conv.ask(new Suggestions([
         'Confirmation',
-        'Date time',
+        'DateTime',
         'Permission',
         'Sign In',
       ]));

@@ -28,7 +28,7 @@ module.exports = {
     conv.ask(' Thanks for signing in!');
     conv.ask(new Suggestions([
       'Confirmation',
-      'Date time',
+      'DateTime',
       'Permission',
       'Place',
     ]));

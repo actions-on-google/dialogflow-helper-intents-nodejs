@@ -20,7 +20,7 @@ module.exports = {
       prompts: {
         initial: 'When would you like to schedule the appointment?',
         date: 'What day was that?',
-        time: 'What time?',
+        time: 'What time works for you?',
       },
     };
     conv.ask(new DateTime(options));

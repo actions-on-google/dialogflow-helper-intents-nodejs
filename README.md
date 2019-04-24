@@ -29,7 +29,7 @@ This feature sample demonstrates Actions on Google helpers while using the [Node
 #### Dialogflow Console
 1. Return to the [Dialogflow Console](https://console.dialogflow.com) > select **Fulfillment** > **Enable** Webhook > Set **URL** to the **Function URL** that was returned after the deploy command > **SAVE**.
     ```
-    Function URL (dialogflowFirebaseFulfillment): https://<REGION>-<PROJECT_ID>.cloudfunctions.net/dialogflowFirebaseFulfillment
+    Function URL (dialogflowFirebaseFulfillment): https://${REGION}-${PROJECT_ID}.cloudfunctions.net/dialogflowFirebaseFulfillment
     ```
 1. From the left navigation menu, click **Integrations** > **Integration Settings** under Google Assistant > Enable **Auto-preview changes** >  **Test** to open the Actions on Google simulator then say or type `Talk to my test app`.
 

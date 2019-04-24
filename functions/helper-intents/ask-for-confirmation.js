@@ -20,9 +20,11 @@ module.exports = {
   },
 
   'ask_for_confirmation_confirmation': (conv, params, confirmationGranted) => {
-    conv.ask(confirmationGranted ? 'Lovely' : 'Alas');
+    conv.ask(confirmationGranted
+      ? 'Thank you for confirming'
+      : 'No problem, you have not confirmed');
     conv.ask(new Suggestions([
-      'Date time',
+      'DateTime',
       'Permission',
       'Place',
       'Sign In',

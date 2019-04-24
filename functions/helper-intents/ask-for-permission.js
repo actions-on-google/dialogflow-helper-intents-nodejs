@@ -25,31 +25,21 @@ module.exports = {
   },
 
   'ask_for_permission_confirmation': (conv, params, confirmationGranted) => {
+    // Also, can access latitude and longitude
+    // const { latitude, longitude } = location.coordinates;
     const {location} = conv.device;
     const {name} = conv.user;
-    if (confirmationGranted) {
-      if (name) {
-        conv.ask(`I'll send the driver your way now ${name.display}.`);
-        conv.ask(new Suggestions([
-          'Confirmation',
-          'Date time',
-          'Place',
-          'Sign In',
-        ]));
-      }
-      if (location) {
-        // const { latitude, longitude } = location.coordinates;
-        // you can uncomment the above lines and use the latitude and longitude
-      }
+    if (confirmationGranted && name && location){
+      conv.ask(`Okay ${name.display}, your driver is now on their way to:
+        ${location.formattedAddress}`);
     } else {
       conv.ask(`Looks like I can't get your location`);
-      conv.ask(new Suggestions([
-        'Confirmation',
-        'Date time',
-        'Place',
-        'Sign In',
-      ]));
     }
+    conv.ask(new Suggestions([
+      'Confirmation',
+      'DateTime',
+      'Place',
+      'Sign In',
+    ]));
   },
-
 };
