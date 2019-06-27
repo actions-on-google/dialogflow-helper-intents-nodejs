@@ -1,6 +1,6 @@
 # Actions on Google: Helper Intents
 
-This feature sample demonstrates Actions on Google helpers while using the [Node.js client library](https://github.com/actions-on-google/actions-on-google-nodejs) and deployed on [Cloud Functions for Firebase](https://firebase.google.com/docs/functions/).
+This feature sample demonstrates Actions on Google helper intents for building on Google Assistant -- using the [Node.js client library](https://github.com/actions-on-google/actions-on-google-nodejs) and deployed on [Cloud Functions for Firebase](https://firebase.google.com/docs/functions/).
 
 ## Setup Instructions
 ### Prerequisites
@@ -12,10 +12,10 @@ This feature sample demonstrates Actions on Google helpers while using the [Node
 
 ### Configuration
 #### Actions Console
-1. From the [Actions on Google Console](https://console.actions.google.com/), add a new project > **Create Project** > under **More options** > **Conversational**
-1. From the left navigation menu under **Build** > **Actions** > **Add Your First Action** > **BUILD** (this will bring you to the Dialogflow console) > Select language and time zone > **CREATE**.
+1. From the [Actions on Google Console](https://console.actions.google.com/), New project > **Create project** > under **More options** > **Conversational**
+1. From the top menu under **Develop** > **Actions** (left nav) > **Add your first action** > **BUILD** (this will bring you to the Dialogflow console) > Select language and time zone > **CREATE**.
 1. In the Dialogflow console, go to **Settings** ⚙ > **Export and Import** > **Restore from zip** using the `agent.zip` in this sample's directory.
-1. Under **Advanced Options** > **Account Linking** select the following:
+1. From the top menu under **Develop** > **Account Linking** select the following:
     + Account creation: **Yes, allow users to sign up for new accounts via voice**
     + Linking type: **Google Sign In**
     + Copy **Client ID** > **SAVE**.
