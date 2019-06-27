@@ -16,10 +16,17 @@ const {Permission, Suggestions} = require('actions-on-google');
 module.exports = {
 
   'ask_for_permission': (conv) => {
+    const permissions = ['NAME'];
+    let context = 'To address you by name';
+    if (conv.user.verification === 'VERIFIED') {
+      // Location permissions only work for verified users
+      // https://developers.google.com/actions/assistant/guest-users
+      permissions.push('DEVICE_COARSE_LOCATION');
+      context += ' and know your location';
+    }
     const options = {
-      context: 'To address you by name and know your location',
-      // Ask for more than one permission. User can authorize all or none.
-      permissions: ['NAME', 'DEVICE_PRECISE_LOCATION'],
+      context,
+      permissions,
     };
     conv.ask(new Permission(options));
   },
@@ -29,11 +36,11 @@ module.exports = {
     // const { latitude, longitude } = location.coordinates;
     const {location} = conv.device;
     const {name} = conv.user;
-    if (confirmationGranted && name && location){
+    if (confirmationGranted && name && location) {
       conv.ask(`Okay ${name.display}, your driver is now on their way to:
         ${location.formattedAddress}`);
     } else {
-      conv.ask(`Looks like I can't get your location`);
+      conv.ask(`Looks like I can't get your information`);
     }
     conv.ask(new Suggestions([
       'Confirmation',

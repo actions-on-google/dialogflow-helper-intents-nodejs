@@ -16,6 +16,18 @@ const {SignIn, Suggestions} = require('actions-on-google');
 module.exports = {
 
   'ask_for_sign_in': (conv) => {
+    if (conv.user.verification !== 'VERIFIED') {
+      // Account linking only works for verified users
+      // https://developers.google.com/actions/assistant/guest-users
+      conv.ask('The Sign In helper only works for verified users.');
+      conv.ask(new Suggestions([
+        'Confirmation',
+        'Date time',
+        'Permission',
+        'Place',
+      ]));
+      return;
+    }
     conv.ask(new SignIn());
   },
 
